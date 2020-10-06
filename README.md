@@ -39,10 +39,10 @@ is considered "at risk" meaning they have a greater chance of dying if infected.
 
 Example: 
 If we set initial population to num_balls=100, at risk population to at_risk_pop=.5, and infected population to infected_pop to .2
-- Total Population: 100
--- Percentage of Healthy Population:    80% (80 samples)
--- Percentage of Infected Population:   20% (20 samples)
--- Percentage of At Risk Population:    50% (50 samples)
+Total Population: 100
+- Percentage of Healthy Population:    80% (80 samples)
+- Percentage of Infected Population:   20% (20 samples)
+- Percentage of At Risk Population:    50% (50 samples)
 *Note that the "at risk" population can be in either the healthy or infected categories or both"
 *See **Further Customizations** for algorithm details on initializing health statuses*
 
