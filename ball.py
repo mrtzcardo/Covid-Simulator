@@ -1,9 +1,10 @@
+#==============================================================================
 #title           :ball.py
-#description     :This program creates and handles balls for covid simluation
+#description     :This program creates and handles balls for COVID simulation
 #author          :Ricardo Martinez
 #date            :October 5th 2020
 #python_version  :3.8.7  
-#email           :mrtzcardo.gmail.com
+#email           :mrtzcardo@gmail.com
 #github          :github.com/mrtzcardo
 #instagram       :@cardo.love
 #==============================================================================
@@ -75,13 +76,13 @@ class ball():
         if self.isInfected() or self.__has_immunity:
             pass
         else:
-            # initalizes infection values
+            # initializes infection values
             self.__infection = random.randint(1000,1500)
 
-            # initalizes death clock value
+            # initializes death clock value
             self.__death_clock = random.randint(1400, 1900)
 
-            # adds muliplier to death clock if at risk
+            # adds multiplier to death clock if at risk
             if self.__at_risk:
                 self.__death_clock = self.__death_clock * risk_factor
 
@@ -148,7 +149,7 @@ class ball_handler():
         self.collision_handler(img)
 
     def collision_handler(self, img):
-        '''function that causes balls to bounce off boundry'''
+        '''function that causes balls to bounce off boundary'''
 
         h, w, _ = img.shape
 
