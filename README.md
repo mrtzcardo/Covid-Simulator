@@ -43,7 +43,7 @@ Total Population: 100
 - Percentage of Healthy Population:    80% (80 samples)
 - Percentage of Infected Population:   20% (20 samples)
 - Percentage of At Risk Population:    50% (50 samples)
-*Note that the "at risk" population can be in either the healthy or infected categories or both"
+*Note that the "at risk" population can be in either the healthy or infected categories or both*
 *See **Further Customizations** for algorithm details on initializing health statuses*
 
 *Increasing the infected sample size typically increases the rate of transmission*
