@@ -1,3 +1,13 @@
+#title           :corona_simulator.py
+#description     :This program simulates the spread of covid with balls bouncing around a boundary
+#author          :Ricardo Martinez
+#date            :October 5th 2020
+#python_version  :3.8.7  
+#email           :mrtzcardo.gmail.com
+#github          :github.com/mrtzcardo
+#instagram       :@cardo.love
+#==============================================================================
+
 import cv2
 import numpy as np
 from ball import ball_handler

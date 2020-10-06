@@ -1,3 +1,13 @@
+#title           :ball.py
+#description     :This program creates and handles balls for covid simluation
+#author          :Ricardo Martinez
+#date            :October 5th 2020
+#python_version  :3.8.7  
+#email           :mrtzcardo.gmail.com
+#github          :github.com/mrtzcardo
+#instagram       :@cardo.love
+#==============================================================================
+
 import cv2
 import math
 import random
