@@ -4,7 +4,7 @@ import random
 
 class ball():
 
-    '''Initalizing variable that will be used though out code'''
+    '''Initalizing variables that will be used though out code'''
     def __init__(self, x, y, radius):
         self.pos = (x,y)
         self.radius = radius
@@ -24,8 +24,9 @@ class ball():
         y_velocity = random.randint(-100, 100) / 100
         self.velocity = [x_velocity, y_velocity]
 
-    '''Gives colors of balls based on their health status, healthy, infected, cured, dead'''
+    
     def draw(self, img):
+        '''Gives colors to balls based on their health status: healthy, infected, cured, dead'''
         p = tuple([int(x) for x in self.pos]) # convert to int for drawing purposes
         c = (0xFF, 0xFF, 0xFF)
         i = (0x00,0x00,0xFF)
@@ -45,29 +46,39 @@ class ball():
         '''Adds the velocity vector to the current position of the ball to move it'''
         self.pos = tuple([sum(x) for x in zip(self.pos, self.velocity)])
 
+        # stops balls from moving if dead
         if self.__is_dead:
             self.velocity = [0, 0]
         self.pos = tuple([sum(x) for x in zip(self.pos, self.velocity)])
         self.__step += .1
 
     def risk(self):
-        '''portion of the population more likely to die if infected'''
+        '''This flags ball as being in the portion of the population more likely to die if infected'''
         self.__at_risk = True
 
     def infect(self):
-        '''marks ball as infected giving them an infection value for rate of recovery and death clock'''
+        '''Marks ball as infected giving them an infection value for rate of recovery and death clock'''
+        
+        # risk factor which decreases death clock count down by a given factor
         risk_factor = .5
 
         if self.isInfected() or self.__has_immunity:
             pass
         else:
+            # initalizes infection values
             self.__infection = random.randint(1000,1500)
+
+            # initalizes death clock value
             self.__death_clock = random.randint(1400, 1900)
+
+            # adds muliplier to death clock if at risk
             if self.__at_risk:
                 self.__death_clock = self.__death_clock * risk_factor
 
     def recover(self):
-        '''once infected they slowly recover then once recovered get immunity'''
+        '''Once infected they slowly recover then once recovered get immunity'''
+
+        # if infection value reaches 0 then recovered/immune, else if death clock reaches 0 first they die
         if self.isInfected() and not self.__is_dead:
             self.__infection -= 1
             if self.__infection < 1:
@@ -88,7 +99,7 @@ class ball():
         return self.__infection >= 1
 
     def isDead(self):
-        '''return whether this ball is dead or not'''
+        '''return whether this ball is dead or not, if __death_clock > 1 then true'''
         return self.__death_clock <= -1
 
     def isRecovered(self):
@@ -97,20 +108,20 @@ class ball():
 
 class ball_handler():
 
-    def __init__(self, w, h, num_balls):
+    def __init__(self, w, h, num_balls, at_risk_pop, inf_pop):
         self.balls = [ball(random.randint(0, w), random.randint(0, h), 6) for _ in range(num_balls)]
 
-        inf_pop = .5
-        at_risk_pop = .5
-
+        # infects population
         for i, b in enumerate(self.balls):
             if i < len(self.balls) * inf_pop:
                 b.infect()
 
+        # gives at risk status to portion of population
         for i, b in enumerate(self.balls):
             if i < len(self.balls) * at_risk_pop:
                 b.risk()
 
+    # creates lists for storing health status data
     health_history = []
     infected_history = []
     death_history = []
@@ -118,8 +129,8 @@ class ball_handler():
 
 
     def move(self, img):
+        '''moves ball as well as where balls step towards recovery/death/none'''
         for b in self.balls:
-            # TODO #6 This might be a good place to recover
             b.recover()
             b.dead()
             b.move(img)
@@ -127,7 +138,8 @@ class ball_handler():
         self.collision_handler(img)
 
     def collision_handler(self, img):
-        # TODO #3 Have balls bounce off of walls
+        '''function that causes balls to bounce off boundry'''
+
         h, w, _ = img.shape
 
         for b in self.balls:
@@ -149,7 +161,7 @@ class ball_handler():
                 distance = math.sqrt((x2 - x1)**2 + (y2 - y1)**2)
                 tempvel = 0
 
-
+                #if balls touch, they infect one another
                 touching = distance <= (b1.radius + b2.radius)
                 if b1.isDead() or b2.isDead():
                     pass;
@@ -167,6 +179,7 @@ class ball_handler():
 
 
     def draw(self, img):
+        '''draws balls and edits health data'''
         infect = 0
         recovered = 0
         healthy = 0
@@ -183,21 +196,19 @@ class ball_handler():
                 healthy += 1
             b.draw(img)
 
+        # adds health status to lists
         self.health_history += [healthy]
         self.infected_history += [infect]
         self.death_history += [dead]
         self.recover_history += [recovered]
 
-        #print(healthy, infect, recovered, dead, healthy + infect + recovered + dead)
-        #return healthy, infect, recovered, dead
-
 
     def survivors(self):
+        '''stops while loop once entire population dies or recovers'''
         x = 1
         for b in self.balls:
             if len(self.infected_history) == 0:
                 pass
             elif len(self.infected_history) != 0:
                 x = self.infected_history[len(self.infected_history)-1]
-            #print(x)
             return x > 0
