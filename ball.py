@@ -223,3 +223,4 @@ class ball_handler():
             elif len(self.infected_history) != 0:
                 x = self.infected_history[len(self.infected_history)-1]
             return x > 0
+            
