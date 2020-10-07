@@ -3,7 +3,7 @@
 #description     :This program simulates the spread of COVID with balls bouncing around a boundary
 #author          :Ricardo Martinez
 #date            :October 5th 2020
-#python_version  :3.8.7  
+#python_version  :3.8.6  
 #email           :mrtzcardo@gmail.com
 #github          :github.com/mrtzcardo
 #instagram       :@cardo.love
@@ -13,7 +13,7 @@ import cv2
 import numpy as np
 from ball import ball_handler
 import matplotlib.pyplot as plt
-from stats import xlsx_stats
+#from stats import xlsx_stats
 
 width = 1400            # desired width of screen 
 height = 800            # desired height of screen 
@@ -29,7 +29,7 @@ dead_history = bh.death_history
 recover_history = bh.recover_history
 
 while bh.survivors() == True: # while is not completely dead or recovered
-    img = np.zeros((h, w, 3), dtype=np.uint8)
+    img = np.zeros((height, width, 3), dtype=np.uint8)
 
     bh.draw(img)
 

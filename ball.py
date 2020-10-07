@@ -3,7 +3,7 @@
 #description     :This program creates and handles balls for COVID simulation
 #author          :Ricardo Martinez
 #date            :October 5th 2020
-#python_version  :3.8.7  
+#python_version  :3.8.6
 #email           :mrtzcardo@gmail.com
 #github          :github.com/mrtzcardo
 #instagram       :@cardo.love
@@ -223,4 +223,3 @@ class ball_handler():
             elif len(self.infected_history) != 0:
                 x = self.infected_history[len(self.infected_history)-1]
             return x > 0
-            
