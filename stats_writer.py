@@ -1,7 +1,18 @@
+#==============================================================================
+#title           :stats_writer.py
+#description     :This program saves an xlsx file of results from COVID simulation
+#author          :Ricardo Martinez
+#date            :October 5th 2020
+#python_version  :3.8.6
+#email           :mrtzcardo@gmail.com
+#github          :github.com/mrtzcardo
+#instagram       :@cardo.love
+#==============================================================================
+
 import xlsxwriter
 
-def xlsx_stats(y1, y2, y3, y4):
 
+def xlsx_stats(y1, y2, y3, y4):
     workbook = xlsxwriter.Workbook('Covid.xlsx')
     worksheet = workbook.add_worksheet("covid")
 
@@ -20,17 +31,17 @@ def xlsx_stats(y1, y2, y3, y4):
 
     row = 1
     for value in y2:
-        worksheet.write(row, col+1, value)
+        worksheet.write(row, col + 1, value)
         row += 1
 
     row = 1
     for value in y3:
-        worksheet.write(row, col+2, value)
+        worksheet.write(row, col + 2, value)
         row += 1
 
     row = 1
     for value in y4:
-        worksheet.write(row, col+3, value)
+        worksheet.write(row, col + 3, value)
         row += 1
 
     workbook.close()
